@@ -101,4 +101,100 @@ defmodule AbxGist.Gists do
   def change_gist(%Gist{} = gist, attrs \\ %{}) do
     Gist.changeset(gist, attrs)
   end
+
+  alias AbxGist.Gists.SaveedGist
+
+  @doc """
+  Returns the list of saved_gists.
+
+  ## Examples
+
+      iex> list_saved_gists()
+      [%SaveedGist{}, ...]
+
+  """
+  def list_saved_gists do
+    Repo.all(SaveedGist)
+  end
+
+  @doc """
+  Gets a single saveed_gist.
+
+  Raises `Ecto.NoResultsError` if the Saveed gist does not exist.
+
+  ## Examples
+
+      iex> get_saveed_gist!(123)
+      %SaveedGist{}
+
+      iex> get_saveed_gist!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_saveed_gist!(id), do: Repo.get!(SaveedGist, id)
+
+  @doc """
+  Creates a saveed_gist.
+
+  ## Examples
+
+      iex> create_saveed_gist(%{field: value})
+      {:ok, %SaveedGist{}}
+
+      iex> create_saveed_gist(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_saveed_gist(attrs \\ %{}) do
+    %SaveedGist{}
+    |> SaveedGist.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a saveed_gist.
+
+  ## Examples
+
+      iex> update_saveed_gist(saveed_gist, %{field: new_value})
+      {:ok, %SaveedGist{}}
+
+      iex> update_saveed_gist(saveed_gist, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_saveed_gist(%SaveedGist{} = saveed_gist, attrs) do
+    saveed_gist
+    |> SaveedGist.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a saveed_gist.
+
+  ## Examples
+
+      iex> delete_saveed_gist(saveed_gist)
+      {:ok, %SaveedGist{}}
+
+      iex> delete_saveed_gist(saveed_gist)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_saveed_gist(%SaveedGist{} = saveed_gist) do
+    Repo.delete(saveed_gist)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking saveed_gist changes.
+
+  ## Examples
+
+      iex> change_saveed_gist(saveed_gist)
+      %Ecto.Changeset{data: %SaveedGist{}}
+
+  """
+  def change_saveed_gist(%SaveedGist{} = saveed_gist, attrs \\ %{}) do
+    SaveedGist.changeset(saveed_gist, attrs)
+  end
 end

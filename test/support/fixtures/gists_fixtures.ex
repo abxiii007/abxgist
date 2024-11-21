@@ -19,4 +19,18 @@ defmodule AbxGist.GistsFixtures do
 
     gist
   end
+
+  @doc """
+  Generate a saveed_gist.
+  """
+  def saveed_gist_fixture(attrs \\ %{}) do
+    {:ok, saveed_gist} =
+      attrs
+      |> Enum.into(%{
+
+      })
+      |> AbxGist.Gists.create_saveed_gist()
+
+    saveed_gist
+  end
 end

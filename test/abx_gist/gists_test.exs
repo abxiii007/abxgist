@@ -60,4 +60,56 @@ defmodule AbxGist.GistsTest do
       assert %Ecto.Changeset{} = Gists.change_gist(gist)
     end
   end
+
+  describe "saved_gists" do
+    alias AbxGist.Gists.SaveedGist
+
+    import AbxGist.GistsFixtures
+
+    @invalid_attrs %{}
+
+    test "list_saved_gists/0 returns all saved_gists" do
+      saveed_gist = saveed_gist_fixture()
+      assert Gists.list_saved_gists() == [saveed_gist]
+    end
+
+    test "get_saveed_gist!/1 returns the saveed_gist with given id" do
+      saveed_gist = saveed_gist_fixture()
+      assert Gists.get_saveed_gist!(saveed_gist.id) == saveed_gist
+    end
+
+    test "create_saveed_gist/1 with valid data creates a saveed_gist" do
+      valid_attrs = %{}
+
+      assert {:ok, %SaveedGist{} = saveed_gist} = Gists.create_saveed_gist(valid_attrs)
+    end
+
+    test "create_saveed_gist/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Gists.create_saveed_gist(@invalid_attrs)
+    end
+
+    test "update_saveed_gist/2 with valid data updates the saveed_gist" do
+      saveed_gist = saveed_gist_fixture()
+      update_attrs = %{}
+
+      assert {:ok, %SaveedGist{} = saveed_gist} = Gists.update_saveed_gist(saveed_gist, update_attrs)
+    end
+
+    test "update_saveed_gist/2 with invalid data returns error changeset" do
+      saveed_gist = saveed_gist_fixture()
+      assert {:error, %Ecto.Changeset{}} = Gists.update_saveed_gist(saveed_gist, @invalid_attrs)
+      assert saveed_gist == Gists.get_saveed_gist!(saveed_gist.id)
+    end
+
+    test "delete_saveed_gist/1 deletes the saveed_gist" do
+      saveed_gist = saveed_gist_fixture()
+      assert {:ok, %SaveedGist{}} = Gists.delete_saveed_gist(saveed_gist)
+      assert_raise Ecto.NoResultsError, fn -> Gists.get_saveed_gist!(saveed_gist.id) end
+    end
+
+    test "change_saveed_gist/1 returns a saveed_gist changeset" do
+      saveed_gist = saveed_gist_fixture()
+      assert %Ecto.Changeset{} = Gists.change_saveed_gist(saveed_gist)
+    end
+  end
 end
