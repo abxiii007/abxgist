@@ -6,8 +6,8 @@ defmodule AbxGist.Gists.SaveedGist do
   @foreign_key_type :binary_id
   schema "saved_gists" do
 
-    field :user_id, :binary_id
-    field :gist_id, :binary_id
+    belongs_to :user, AbxGist.Accounts.User
+    belongs_to :gist, AbxGist.Gists.Gist
 
     timestamps(type: :utc_datetime)
   end
@@ -15,7 +15,7 @@ defmodule AbxGist.Gists.SaveedGist do
   @doc false
   def changeset(saveed_gist, attrs) do
     saveed_gist
-    |> cast(attrs, [])
-    |> validate_required([])
+    |> cast(attrs, [:user_id, :gist_id])
+    |> validate_required([:user_id, :gist_id])
   end
 end

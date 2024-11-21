@@ -49,8 +49,9 @@ defmodule AbxGist.Gists do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_gist(attrs \\ %{}) do
-    %Gist{}
+  def create_gist(user, attrs \\ %{}) do
+    user
+    |>Ecto.build_assoc(:gists)
     |> Gist.changeset(attrs)
     |> Repo.insert()
   end
@@ -145,8 +146,9 @@ defmodule AbxGist.Gists do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_saveed_gist(attrs \\ %{}) do
-    %SaveedGist{}
+  def create_saveed_gist(user, attrs \\ %{}) do
+    user 
+    |> Ecto.build_assoc(:saved_gists)
     |> SaveedGist.changeset(attrs)
     |> Repo.insert()
   end
