@@ -153,7 +153,7 @@ defmodule AbxGist.Gists do
     |> Repo.insert()
   end
 
-  @doc """
+  @doc """ 
   Updates a saveed_gist.
 
   ## Examples
