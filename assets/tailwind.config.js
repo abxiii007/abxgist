@@ -6,10 +6,12 @@ const fs = require("fs")
 const path = require("path")
 
 module.exports = {
+  mode: 'jit',
   content: [
     "./js/**/*.js",
     "../lib/abx_gist_web.ex",
-    "../lib/abx_gist_web/**/*.*ex"
+    "../lib/abx_gist_web/**/*.*ex",
+    "./**/*.{html,js,jsx,ts,tsx}"
   ],
   theme: {
     extend: {
