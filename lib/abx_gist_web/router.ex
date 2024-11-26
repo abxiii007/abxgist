@@ -66,6 +66,9 @@ defmodule AbxGistWeb.Router do
 
     live_session :require_authenticated_user,
       on_mount: [{AbxGistWeb.UserAuth, :ensure_authenticated}] do
+        
+      live "/create", CreateGistLive
+      live "/gist", GistLive
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
     end

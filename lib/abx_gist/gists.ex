@@ -4,6 +4,7 @@ defmodule AbxGist.Gists do
   """
 
   import Ecto.Query, warn: false
+  alias AbxGist.Accounts.User
   alias AbxGist.Repo
 
   alias AbxGist.Gists.Gist
@@ -86,10 +87,16 @@ defmodule AbxGist.Gists do
       {:error, %Ecto.Changeset{}}
 
   """
-  def delete_gist(%Gist{} = gist) do
-    Repo.delete(gist)
-  end
+  def delete_gist(%User{} = user, gist_id) do
+    gist = Repo.get!(Gist, gist_id)
 
+    if user.id == gist.user_id do
+      Repo.delete(gist)
+      {:ok, gist}
+    else
+      {:error, :unauthorized}
+    end
+  end
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking gist changes.
 
